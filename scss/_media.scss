@@ -1,0 +1,16 @@
+// Media queries mixins
+@mixin below($width, $orientation: 'width') {
+	@media all and (max-#{$orientation}: $width) {
+		@content;
+	}
+}
+@mixin above($width, $orientation: 'width') {
+	@media all and (min-#{$orientation}: $width) {
+		@content;
+	}
+}
+@mixin between($minWidth, $maxWidth, $orientation: 'width') {
+	@media all and (min-#{$orientation}: $minWidth) and (max-#{$orientation}: $maxWidth) {
+		@content;
+	}
+}
