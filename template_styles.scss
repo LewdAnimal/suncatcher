@@ -10,9 +10,9 @@
     margin: 0 auto;
 
 
-    @include below($desktop) {
-        width: calc(100% - 40px);
-        padding: 0 20px 0 20px;
+    @include below($mid-desktop) {
+        width: calc(100% - 48px);
+        /* padding: 0 24px 0 24px; */
     }
 }
 
@@ -36,6 +36,24 @@ svg {
     fill: var(--color-logo);
 }
 
+
+.mobile-hide {
+
+    @include below($tablet) {
+        display: none !important;
+    }
+}
+
+.mobile-visible {
+    display: none !important;
+
+    @include below($tablet) {
+        display: flex !important;
+        ;
+    }
+}
+
+
 //-------------------------------------------------------------
 .header {
     position: absolute;
@@ -43,6 +61,10 @@ svg {
     z-index: 99;
     margin-top: 31px;
     height: 64px;
+
+    @include below($tablet) {
+        z-index: 999;
+    }
 
     &__wrapper {
         display: flex;
@@ -97,13 +119,114 @@ svg {
     }
 }
 
-.mobile-hide {
-    display: block;
+
+
+
+//-------------------------------------------------------------
+.mobile-menu {
+    position: fixed;
+    background: #25282A;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    padding: 0 20px 0 20px;
+    display: none;
+
+    &__lists {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+
+    &__item {
+        margin-right: 0px;
+        margin-bottom: 16px;
+    }
+
+    &__link {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--current-color);
+        text-decoration: none;
+        position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 1%;
+            background: #fff;
+            height: 1px;
+            width: 0%;
+            z-index: -1;
+            transition: width 0.8s, opacity 0.8s, box-shadow 0.8s;
+            border-radius: 100px;
+            opacity: 0;
+            box-shadow: 0 0 16px rgba(42, 157, 143, 0);
+        }
+
+        &:hover {}
+
+        &:hover:after {
+            width: 100%;
+            opacity: 1;
+            box-shadow: 0 0 16px rgba(42, 157, 143, 0.88);
+        }
+
+        &:after {
+            right: 0;
+        }
+
+        &:hover:after {
+            right: auto;
+            left: 0;
+        }
+    }
+
+
+
+}
+
+.btn-all-mobile {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 220px;
+    height: 44px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #181818;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='52' height='45' fill='none'%3e%3ccircle cx='30' cy='22.333' r='21.5' stroke='%23CCC'/%3e%3cpath fill='%23181818' d='M18.904 22.333H0v1h18.904v-1Z'/%3e%3cpath fill='%23181818' d='M18.902 19.833v6l4.975-3-4.975-3Z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center right;
+    text-decoration: none;
+    margin-top: 60px;
+    cursor: pointer;
 
     @include below($tablet) {
-        display: none;
+        display: flex;
     }
+
 }
+
+
 
 //-------------------------------------------------------------
 .burger {
@@ -116,12 +239,29 @@ svg {
         background-color: #FFFFFF;
         transition: 0.3s;
         margin: 10px 0;
+
     }
+
+    &--open &__line:nth-child(1) {
+        margin: 0;
+        transform: rotate(135deg);
+    }
+
+    &--open &__line:nth-child(2) {
+        margin: 0;
+        transform: rotate(-135deg);
+    }
+
 
     @include below($tablet) {
         display: block;
     }
+
+
+
+
 }
+
 
 //-------------------------------------------------------------
 .menu {
@@ -141,6 +281,10 @@ svg {
 
     &__item {
         margin-right: 60px;
+
+        @include below($desktop) {
+            margin-right: 25px;
+        }
     }
 
     &__link {
@@ -153,8 +297,45 @@ svg {
         text-transform: uppercase;
         color: var(--current-color);
         text-decoration: none;
+        position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 1%;
+            background: #fff;
+            height: 1px;
+            width: 0%;
+            z-index: -1;
+            transition: width 0.8s, opacity 0.8s, box-shadow 0.8s;
+            border-radius: 100px;
+            opacity: 0;
+            box-shadow: 0 0 16px rgba(42, 157, 143, 0);
+        }
+
+        &:hover {}
+
+        &:hover:after {
+            width: 100%;
+            opacity: 1;
+            box-shadow: 0 0 16px rgba(42, 157, 143, 0.88);
+        }
+
+        &:after {
+            right: 0;
+        }
+
+        &:hover:after {
+            right: auto;
+            left: 0;
+        }
     }
+
+
+
 }
+
 
 //-------------------------------------------------------------
 .order-button {
@@ -173,8 +354,55 @@ svg {
     text-transform: uppercase;
     color: var(--current-color);
     cursor: pointer;
+    transition: background-color 0.4s;
+
+    &:hover {
+        background-color: #F58220;
+    }
 }
 
+.order-window {
+    position: fixed;
+    min-width: 1374px;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    background: #fff;
+    padding: 120px 140px 140px 140px;
+    transform: translate(-50%, -50%);
+    display: none;
+
+    &__title {
+        font-family: 'Roboto Condensed';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: 0.05em;
+        color: #181818;
+        margin-bottom: 12px;
+    }
+
+    &__subtitle {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 32px;
+        color: #474747;
+        margin-bottom: 60px;
+    }
+
+}
+
+.overlay {
+    position: fixed;
+    z-index: 900;
+    width: 100vw;
+    height: 100vh;
+    background: #181818;
+    opacity: 0.45;
+}
 
 //-------------------------------------------------------------
 .slider {
@@ -298,6 +526,10 @@ svg {
         bottom: 0;
         z-index: 99;
         cursor: pointer;
+
+        &:hover {
+            background-color: #F58220;
+        }
     }
 
     &__button-next {
@@ -382,6 +614,17 @@ svg {
     padding-bottom: 115px;
     width: 100%;
 
+    @include below($tablet) {
+        padding-bottom: 80px;
+    }
+
+    &__wrapper {
+
+        @include below($tablet) {
+            width: 100%;
+        }
+    }
+
     &__title {
         display: flex;
         justify-content: space-between;
@@ -404,10 +647,23 @@ svg {
     &__item {
         max-width: 812px;
         height: 507px;
+    }
+
+    &__img {
+        overflow: hidden;
+        height: 507px;
 
         & img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+
+            transition: 0.8s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+
         }
     }
 
@@ -631,6 +887,10 @@ svg {
 .blog-main {
     margin-top: 140px;
 
+    @include below($tablet) {
+        width: 100%;
+    }
+
     &__title {
         display: flex;
         justify-content: space-between;
@@ -654,18 +914,16 @@ svg {
         width: 670px;
         border-bottom: 1px solid #E6E6E6;
         padding-bottom: 24px;
-
-       
     }
 
     .blog-main &__item {
-        width: 528px;
+        width: 30%;
         border-top: 1px solid #E6E6E6;
         border-bottom: 0;
 
         @include below($tablet) {
-                width: 100%;
-            }
+            width: 100%;
+        }
     }
 
 
@@ -726,15 +984,30 @@ svg {
         line-height: 27px;
         letter-spacing: 0.05em;
         color: #181818;
-
         width: 101px;
         margin-top: 24px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
 
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='21' height='7' fill='none'%3e%3cpath fill='%23181818' d='M15.5 3.334H.5v1h15v-1ZM15.5.834v6l5-3-5-3Z'/%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: center right;
 
+        &::after {
+            content: "";
+            width: 20px;
+            height: 6px;
+            display: block;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='21' height='7' fill='none'%3e%3cpath fill='%23181818' d='M15.5 3.334H.5v1h15v-1ZM15.5.834v6l5-3-5-3Z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            margin-left: 12px;
+            transition: .4s;
+            transform: translateX(0);
+        }
+
+        &:hover::after {
+            transform: translateX(5px);
+
+        }
     }
 }
 
@@ -816,7 +1089,7 @@ svg {
         align-items: center;
         width: 100%;
         height: 307px;
-        
+
 
         @include below($tablet) {
             display: block;
@@ -878,8 +1151,8 @@ svg {
         color: #8C8C8C;
 
         @include below($tablet) {
-                margin-bottom: 12px;
-            }
+            margin-bottom: 12px;
+        }
     }
 
     &__develop {
@@ -900,7 +1173,6 @@ svg {
 
 //-------------------------------------------------------------
 .order-form {
-
 
     &__input {
         font-family: 'Montserrat';
@@ -984,7 +1256,25 @@ svg {
             width: 100%;
             margin-top: 40px;
         }
+
+        &:hover {
+            background-color: #f58220;
+            color: #fff;
+            transition: background-color 0.4s;
+        }
     }
+
+    .order-window &__button {
+        color: #181818;
+
+        &:hover {
+            background-color: #f58220;
+            color: #fff;
+            transition: background-color 0.4s;
+        }
+    }
+
+
 
     &__top {
         display: flex;
