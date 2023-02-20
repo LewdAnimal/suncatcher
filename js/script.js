@@ -37,6 +37,9 @@ let
 order_buttom.forEach(function (item) {
 
   item.onclick = function () {
+    mobile_menu.style.display = 'none';
+    this.classList.toggle("burger--open");
+
     overlay.className = 'overlay';
     document.body.prepend(overlay);
     order_window.style.display = 'block';
@@ -57,6 +60,13 @@ const project_slider = new Swiper('.project-slider__items', {
     el: ".swiper-scrollbar"
   },
 });
+
+
+const project_detail_slider = new Swiper('.project-detail__items', {
+  slidesPerView: "auto",
+  spaceBetween: 40,
+});
+
 
 
 let
